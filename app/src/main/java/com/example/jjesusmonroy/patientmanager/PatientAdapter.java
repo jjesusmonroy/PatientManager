@@ -1,6 +1,8 @@
 package com.example.jjesusmonroy.patientmanager;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,22 +19,38 @@ import java.util.Date;
 
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.RecyclerViewHolder>{
     String [][] data;
+    Context context;
 
-    public PatientAdapter(String[][] data) {
+    public PatientAdapter(String[][] data, Context context) {
         this.data = data;
+        this.context = context;
     }
 
     @Override
     public PatientAdapter.RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.patient_layout,parent,false);
-        return new RecyclerViewHolder(view);
+        context = parent.getContext();
+        LayoutInflater layoutInflater;
+        layoutInflater = LayoutInflater.from(context);
+
+        View view = layoutInflater.inflate(R.layout.patient_layout,parent,false);
+        return new PatientAdapter.RecyclerViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(PatientAdapter.RecyclerViewHolder holder, int position) {
+        final String id = data[position][0];
+        System.out.println(data[position][0]);
         holder.name.setText("name : "+data[position][1]);
         holder.phone.setText("phone : "+data[position][3]);
         holder.age.setText("age : "+calculateAge(data[position][5]));
+        holder.meds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context,MedActivity.class);
+                i.putExtra("key",id);
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override

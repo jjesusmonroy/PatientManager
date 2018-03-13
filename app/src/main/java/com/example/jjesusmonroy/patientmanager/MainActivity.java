@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void listAll(){
         String [][] data = db.query("select * from patient");
-        adapter=new PatientAdapter(data);
+        adapter=new PatientAdapter(data,this);
         layoutManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(layoutManager);
         recycler.setAdapter(adapter);

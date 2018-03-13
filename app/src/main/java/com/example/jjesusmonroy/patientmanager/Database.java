@@ -53,6 +53,34 @@ public class Database extends SQLiteOpenHelper {
         db.insert("patient",null,values);
     }
 
+    public void insertMed(String medname, String instructions,
+                          String firstdate, String lastdate, String suffering,
+                          String idPatient){
+        ContentValues values = new ContentValues();
+        values.put("medname",medname);
+        values.put("instructions",instructions);
+        values.put("firstdate",firstdate);
+        values.put("lastdate",lastdate);
+        db.insert("medicine",null,values);
+        String idmed=getId("select * from medicine where instructions='"+instructions+"' and " +
+                "firstdate='"+firstdate+"' and lastdate ='"+lastdate+"'");
+        ContentValues values2 = new ContentValues();
+        values2.put("idPatient",idPatient);
+        values2.put("idMed",idmed);
+        values2.put("suffering",suffering);
+        db.insert("patient_med",null,values2);
+    }
+
+    private String getId(String sql){
+        String string="";
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            string= cursor.getString(0);
+        }
+        if(cursor!=null){cursor.close();}
+        return string;
+    }
+
     public String [][] query(String sql){
         Cursor c = db.rawQuery(sql,null);
         String [][] elements = new String [c.getCount()][c.getColumnCount()+1];
