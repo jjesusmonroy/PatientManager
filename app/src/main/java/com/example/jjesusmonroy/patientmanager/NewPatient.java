@@ -30,7 +30,7 @@ public class NewPatient extends AppCompatActivity {
                 String date = day+"-"+month+"-"+year;
                 db.insertPatient(name.getText().toString(),
                         address.getText().toString(),
-                        Integer.parseInt(phone.getText().toString()),
+                        phone.getText().toString(),
                         email.getText().toString(),
                         date);
             }

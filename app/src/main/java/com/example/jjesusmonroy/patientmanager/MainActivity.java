@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.Adapter adapter;
 
     Database db;
-    Button newPatient,update;
+    Button newPatient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void listAll(){
-        String [][] data = db.query("select name from patient");
+        String [][] data = db.query("select * from patient");
         adapter=new PatientAdapter(data);
         layoutManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(layoutManager);

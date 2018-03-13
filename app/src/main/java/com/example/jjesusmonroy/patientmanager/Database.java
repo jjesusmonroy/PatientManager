@@ -25,13 +25,16 @@ public class Database extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE patient(idPatient integer primary key " +
                 "autoincrement, name " +
-                "varchar(50),address varchar(100),phonenumber integer, email varchar(50),date date)");
+                "varchar(50),address varchar(100),phonenumber varchar(15), email varchar(50),date date)");
         sqLiteDatabase.execSQL("CREATE TABLE medicine(idMed integer primary key autoincrement, medname " +
-                "varchar(50), suffering varchar(300), instructions varchar(300), condate date," +
+                "varchar(50), instructions varchar(300)," +
                 "firstdate date, lastdate date)");
         sqLiteDatabase.execSQL("CREATE TABLE patient_med (idPatient integer, idMed integer," +
+                "suffering varchar(300)," +
                 "foreign key (idPatient) references patient(idPatient)," +
                 "foreign key (idMed) references medicine(idMed))");
+        sqLiteDatabase.execSQL("CREATE TABLE checkDate(checkdate date, idPatient integer," +
+                "foreign key (idPatient) references patient(idPatient))");
     }
 
     @Override
@@ -39,7 +42,7 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
-    public void insertPatient(String name, String address, int number, String email,
+    public void insertPatient(String name, String address, String number, String email,
                               String date){
         ContentValues values = new ContentValues();
         values.put("name",name);
