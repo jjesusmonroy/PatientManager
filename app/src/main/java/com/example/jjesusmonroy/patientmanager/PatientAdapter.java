@@ -45,7 +45,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Recycler
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
-            name=itemView.findViewById(R.id.name);
+            name=itemView.findViewById(R.id.ptname);
             phone=itemView.findViewById(R.id.ptphonenumber);
             age=itemView.findViewById(R.id.ptage);
             modify=itemView.findViewById(R.id.ptmodify);
@@ -66,6 +66,5 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Recycler
         int month = Integer.parseInt(b[1]);
         int year = Integer.parseInt(b[2]);
         return (((ayear*365)+(amonth*30)+aday)-((year*365)+(month*30)+day))/365;
-
     }
 }

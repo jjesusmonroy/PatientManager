@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         adapter=new PatientAdapter(data);
         layoutManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(layoutManager);
-        recycler.setHasFixedSize(true);
         recycler.setAdapter(adapter);
 
     }
