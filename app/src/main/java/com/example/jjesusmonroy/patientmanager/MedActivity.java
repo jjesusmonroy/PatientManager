@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 public class MedActivity extends AppCompatActivity {
     Button insertar;
+    String key="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_med);
         init();
-        String key="";
         Intent intent = getIntent();
         if (intent != null) {
             key = intent.getStringExtra("key");
@@ -23,7 +23,9 @@ public class MedActivity extends AppCompatActivity {
         insertar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(MedActivity.this,NewMed.class);
+                i.putExtra("key",key);
+                startActivity(i);
             }
         });
     }
