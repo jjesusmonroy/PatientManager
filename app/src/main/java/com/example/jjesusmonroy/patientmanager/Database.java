@@ -97,5 +97,16 @@ public class Database extends SQLiteOpenHelper {
         return elements;
     }
 
+    public void updatePatient(String id,String name, String address, String phone, String email
+    , String date){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name",name);
+        contentValues.put("address",address);
+        contentValues.put("phonenumber",phone);
+        contentValues.put("email",email);
+        contentValues.put("date",date);
+        db.update("patient",contentValues,"idPatient='"+id+"'",null);
+    }
+
 
 }

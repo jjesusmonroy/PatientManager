@@ -19,8 +19,12 @@
         <activity
             android:name=".NewPatient"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MedActivity" />
-        <activity android:name=".NewMed"></activity>
+        <activity
+            android:name=".MedActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".NewMed"
+            android:parentActivityName=".MedActivity" />
     </application>
 
 </manifest>

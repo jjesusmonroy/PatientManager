@@ -7,23 +7,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class NewMed extends AppCompatActivity {
 
     EditText medname,instructions,suffering;
     DatePicker firstdate,lastdate;
     Button save,cancel;
-
+    TextView tv;
     Database db;
-    String key="";
-
+    public static String key="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_med);
         init();
-        Intent i = getIntent();
-        key=i.getStringExtra("key");
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

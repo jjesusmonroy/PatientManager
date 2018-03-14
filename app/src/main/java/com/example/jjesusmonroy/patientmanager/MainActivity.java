@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         newPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NewPatient newPatient = new NewPatient();
+                newPatient.titulo="Inserting new patient";
+                newPatient.key="";
                 Intent i = new Intent(MainActivity.this,NewPatient.class);
                 startActivity(i);
                 listAll();
@@ -36,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listAll();
+    }
 
     private void init(){
         recycler= findViewById(R.id.recyclerView);
@@ -43,12 +51,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void listAll(){
-        String [][] data = db.query("select * from patient");
+        String [][] data = db.query("select * from patient order by name");
         adapter=new PatientAdapter(data,this);
         layoutManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(layoutManager);
         recycler.setAdapter(adapter);
-
     }
 
 
