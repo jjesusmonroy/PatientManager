@@ -39,6 +39,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Recycler
     @Override
     public void onBindViewHolder(PatientAdapter.RecyclerViewHolder holder, int position) {
         final String id = data[position][0];
+        final String patname = data[position][1];
 
         holder.name.setText("name : "+data[position][1]);
         holder.phone.setText("phone : "+data[position][3]);
@@ -59,6 +60,16 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Recycler
                 newPatient.titulo="Modifying patient";
                 newPatient.key=id;
                 Intent i = new Intent(context,NewPatient.class);
+                context.startActivity(i);
+            }
+        });
+        holder.checkdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckDate checkDate = new CheckDate();
+                checkDate.key=id;
+                checkDate.patientname=patname;
+                Intent i = new Intent(context,CheckDate.class);
                 context.startActivity(i);
             }
         });

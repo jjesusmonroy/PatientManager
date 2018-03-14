@@ -25,6 +25,9 @@
         <activity
             android:name=".NewMed"
             android:parentActivityName=".MedActivity" />
+        <activity android:name=".CheckDate"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>

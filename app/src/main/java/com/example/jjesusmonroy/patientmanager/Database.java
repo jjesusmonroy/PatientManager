@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by jjesusmonroy on 12/03/18.
  */
@@ -33,7 +35,7 @@ public class Database extends SQLiteOpenHelper {
                 "suffering varchar(300)," +
                 "foreign key (idPatient) references patient(idPatient)," +
                 "foreign key (idMed) references medicine(idMed))");
-        sqLiteDatabase.execSQL("CREATE TABLE checkDate(checkdate date, idPatient integer," +
+        sqLiteDatabase.execSQL("CREATE TABLE checkdate(checkdate date, idPatient integer," +
                 "foreign key (idPatient) references patient(idPatient))");
     }
 
@@ -120,6 +122,28 @@ public class Database extends SQLiteOpenHelper {
                 "idPatient = '"+id2+"' and idMed ='"+id+"'";
         db.execSQL(query);
     }
+
+    public void insertCheckDate(String idPatient,String date){
+        if(exist(idPatient))db.execSQL("update checkdate set checkdate='"+date+"' where " +
+                "idPatient='"+idPatient+"'");
+        else db.execSQL("insert into checkdate values ('"+date+"','"+idPatient+"')");
+    }
+    public boolean exist(String idPatient){
+        boolean flag=false;
+        Cursor c = db.rawQuery("select * from checkdate",null);
+        ArrayList<String> list = new ArrayList<>();
+        if(c.moveToFirst()){
+            do{
+                list.add(c.getString(1));
+            }while(c.moveToNext());
+        }
+        if(c!=null)c.close();
+        for(String element:list){
+            if(element.equals(idPatient))flag=true;
+        }
+        return flag;
+    }
+
 
 
 }
