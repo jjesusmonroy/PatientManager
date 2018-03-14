@@ -70,7 +70,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Recycler
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        TextView name,phone,age,modify,meds;
+        TextView name,phone,age,modify,meds,checkdate;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
@@ -79,6 +79,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.Recycler
             age=itemView.findViewById(R.id.ptage);
             modify=itemView.findViewById(R.id.ptmodify);
             meds=itemView.findViewById(R.id.ptmeds);
+            checkdate=itemView.findViewById(R.id.ptcheckdate);
         }
     }
 

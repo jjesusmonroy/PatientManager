@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFF"
                 android:text="Modify"
-                android:layout_weight=".5"
+                android:layout_weight=".33333"
                 />
             <TextView
                 android:id="@+id/ptmeds"
@@ -67,7 +67,14 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFF"
                 android:text="Meds"
-                android:layout_weight=".5"/>
+                android:layout_weight=".33333"/>
+            <TextView
+                android:id="@+id/ptcheckdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF"
+                android:text="checkDate"
+                android:layout_weight=".33333"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.jjesusmonroy.patientmanager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import java.util.Date;
 
 public class MedAdapter extends RecyclerView.Adapter<MedAdapter.RecyclerViewHolder>{
 
+    public static String key="";
     String [][] data;
     Context context;
 
@@ -42,6 +44,16 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.RecyclerViewHold
         holder.suffering.setText("suffering: "+data[position][1]);
         holder.instructions.setText("instructions: "+data[position][2]);
         holder.treatment.setText(treamentString(treatment(data[position][3])));
+        final String medkey=data[position][4];
+        holder.modify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NewMed newMed = new NewMed();
+                newMed.medKey=medkey;
+                Intent i = new Intent(context,NewMed.class);
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override

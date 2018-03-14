@@ -24,17 +24,19 @@ public class MedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_med);
         init();
         listAll();
+        NewMed newMed = new NewMed();
+        newMed.key=irving;
+        newMed.medKey="";
         insertar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NewMed newMed = new NewMed();
-                newMed.key=irving;
                 Intent i = new Intent(MedActivity.this,NewMed.class);
                 startActivity(i);
-                listAll();
             }
         });
     }
+
+
 
     private void init(){
         db = new Database(this);
@@ -44,7 +46,7 @@ public class MedActivity extends AppCompatActivity {
 
     private void listAll(){
         String query = "select m.medname,pm.suffering,m.instructions," +
-                    "m.lastdate from patient p inner join patient_med pm on " +
+                    "m.lastdate,m.idMed from patient p inner join patient_med pm on " +
                     "p.idPatient=pm.idPatient inner join medicine m on pm.idMed=" +
                     "m.idMed where p.idPatient ='" + irving + "' order by m.medname;";
         String [][] data = db.query(query);

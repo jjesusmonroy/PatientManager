@@ -60,6 +60,12 @@ public class NewPatient extends AppCompatActivity {
                 }
             }
         });
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
     private void load(String [][] data){
         name.setText(data[0][1]);

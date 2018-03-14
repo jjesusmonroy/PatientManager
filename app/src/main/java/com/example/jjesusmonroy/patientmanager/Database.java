@@ -108,5 +108,18 @@ public class Database extends SQLiteOpenHelper {
         db.update("patient",contentValues,"idPatient='"+id+"'",null);
     }
 
+    public void updateMed(String id,String id2, String medname, String instructions, String firstdate
+    , String lastdate, String suffering){
+        ContentValues cv1 = new ContentValues();
+        cv1.put("medname",medname);
+        cv1.put("instructions",instructions);
+        cv1.put("firstdate",firstdate);
+        cv1.put("lastdate",lastdate);
+        db.update("medicine",cv1,"idMed='"+id+"'",null);
+        String query="update patient_med set suffering = '"+suffering+"' where " +
+                "idPatient = '"+id2+"' and idMed ='"+id+"'";
+        db.execSQL(query);
+    }
+
 
 }
