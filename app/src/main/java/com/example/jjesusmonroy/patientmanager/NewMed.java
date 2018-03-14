@@ -8,6 +8,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class NewMed extends AppCompatActivity {
 
@@ -42,18 +47,27 @@ public class NewMed extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(medKey.equals("")) {
-                    int day = firstdate.getDayOfMonth();
-                    int month = firstdate.getMonth() + 1;
-                    int year = firstdate.getYear();
-                    String firstd = day + "-" + month + "-" + year;
-                    int sday = lastdate.getDayOfMonth();
-                    int smonth = lastdate.getMonth() + 1;
-                    int syear = lastdate.getYear();
-                    String lastd = sday + "-" + smonth + "-" + syear;
-                    db.insertMed(medname.getText().toString(),
-                            instructions.getText().toString(),
-                            firstd, lastd,
-                            suffering.getText().toString(), key);
+                    if(validate()){
+                        int day = firstdate.getDayOfMonth();
+                        int month = firstdate.getMonth() + 1;
+                        int year = firstdate.getYear();
+                        String firstd = day + "-" + month + "-" + year;
+                        int sday = lastdate.getDayOfMonth();
+                        int smonth = lastdate.getMonth() + 1;
+                        int syear = lastdate.getYear();
+                        String lastd = sday + "-" + smonth + "-" + syear;
+                        db.insertMed(medname.getText().toString(),
+                                instructions.getText().toString(),
+                                firstd, lastd,
+                                suffering.getText().toString(), key);
+                        clear();
+                        Toast.makeText(getBaseContext(), "new med added!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getBaseContext(), "campos vacios",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
                     int day = firstdate.getDayOfMonth();
@@ -107,5 +121,25 @@ public class NewMed extends AppCompatActivity {
         cancel=findViewById(R.id.nmcancel);
 
         db=new Database(this);
+    }
+    private void clear(){
+        medname.setText("");
+        instructions.setText("");
+        suffering.setText("");
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String actualdate =dateFormat.format(date);
+        String [] split = actualdate.split("-");
+        int day=Integer.parseInt(split[0]);
+        int month=Integer.parseInt(split[1]);
+        int year=Integer.parseInt(split[2]);
+        firstdate.updateDate(year,month,day);
+        lastdate.updateDate(year,month,day);
+    }
+    private boolean validate(){
+        if(medname.getText().toString().equals("") ||
+                instructions.getText().toString().equals("") ||
+                suffering.getText().toString().equals(""))return false;
+        else return true;
     }
 }

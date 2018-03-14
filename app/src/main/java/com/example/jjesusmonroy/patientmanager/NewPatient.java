@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -48,15 +49,24 @@ public class NewPatient extends AppCompatActivity {
                     onBackPressed();
                 }
                 else {
-                    int day = datePicker.getDayOfMonth();
-                    int month = datePicker.getMonth() + 1;
-                    int year = datePicker.getYear();
-                    String date = day + "-" + month + "-" + year;
-                    db.insertPatient(name.getText().toString(),
-                            address.getText().toString(),
-                            phone.getText().toString(),
-                            email.getText().toString(),
-                            date);
+                    if(validate()){
+                        int day = datePicker.getDayOfMonth();
+                        int month = datePicker.getMonth() + 1;
+                        int year = datePicker.getYear();
+                        String date = day + "-" + month + "-" + year;
+                        db.insertPatient(name.getText().toString(),
+                                address.getText().toString(),
+                                phone.getText().toString(),
+                                email.getText().toString(),
+                                date);
+                        clear();
+                        Toast.makeText(getBaseContext(), "new patient inserted!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getBaseContext(), "campos vacios",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -101,5 +111,12 @@ public class NewPatient extends AppCompatActivity {
         int month=Integer.parseInt(split[1]);
         int year=Integer.parseInt(split[2]);
         datePicker.updateDate(year,month,day);
+    }
+    private boolean validate(){
+        if(name.getText().toString().equals("") ||
+                address.getText().toString().equals("") ||
+                phone.getText().toString().equals("") ||
+                email.getText().toString().equals(""))return false;
+        else return true;
     }
 }
